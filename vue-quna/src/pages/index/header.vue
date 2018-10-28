@@ -5,7 +5,7 @@
         <span class="iconfont search-icon">&#xe608;</span>输入城市/景点/游玩主题
       </div>
       <div class="city">
-               乌鲁木齐
+              乌鲁木齐
       </div>
     </div>
 </template>
@@ -48,9 +48,9 @@ export default {
     .city
       padding-right: .6rem
       position: relative
-      &:before
+      &:after
        position: absolute
-       top: .34rem
+       top: .36rem
        right: .2rem
        content: '\0020'
        width: 0
