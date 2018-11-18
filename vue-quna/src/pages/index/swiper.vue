@@ -1,6 +1,7 @@
+<script src="../../store/index.js"></script>
 <template>
   <div class='slider-container'>
-    <swiper :options='swiperOption'>
+    <swiper :options='swiperOption' v-if="hasSwiper">
       <swiper-slide v-for='item of list' :key='item.id'>
          <img class='slide-img' :src='item.imgUrl' />
       </swiper-slide>
@@ -21,6 +22,11 @@ export default {
         loop: true,
         pagination: '.swiper-pagination'
       }
+    }
+  },
+  computed: {
+    hasSwiper () {
+      return !!this.list.length
     }
   }
 }

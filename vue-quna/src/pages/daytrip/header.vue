@@ -1,22 +1,21 @@
-<script src="../../router/index.js"></script>
 <template>
     <div class="header">
-      <div class="back iconfont">&#xe600;</div>
+      <div class="back iconfont" @click="handlePrePageClick">&#xe600;</div>
       <div class="search">
-        <span class="iconfont search-icon">&#xe608;</span>输入城市/景点/游玩主题
+                      一日游
       </div>
-      <div class="city" @click="handleCityClick">
-        {{$store.getters.doubleCity}}
+      <div class="city">
+                    北京
       </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'index-header',
+  name: 'daytrip-header',
   methods: {
-    handleCityClick () {
-      this.$router.push('/city')
+    handlePrePageClick () {
+      this.$router.go(-1)
     }
   }
 }
@@ -47,10 +46,6 @@ export default {
       color: #c2c2c2
       font-size: .26rem
       border-radius: .06rem
-      .search-icon
-       position: relative
-       top: .02rem
-       padding: 0 .12rem
     .city
       padding-right: .6rem
       position: relative

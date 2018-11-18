@@ -42,7 +42,6 @@ export default {
   },
   mounted () {
     setTimeout(() => {
-      console.log(this.pageList)
     }, 3000)
   }
 }
@@ -78,5 +77,5 @@ export default {
     .swiper-pagination >>> .swiper-pagination-bullet-active
        background: rgba(0,175,190,.8)
     .swiper-container
-     height: 195px
+     height: 3.8rem
 </style>
