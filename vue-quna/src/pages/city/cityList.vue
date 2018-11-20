@@ -4,7 +4,7 @@
       <h6 class="area-title">您的位置</h6>
       <div class="location">
         <div class="location-city citySelect" ref="selectCity">
-          {{$store.state.city}}
+          {{city}}
         </div>
       </div>
     </div>
@@ -28,15 +28,20 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'city-list',
   props: {
     list: Array,
     cityAllListInfo: Array
   },
+  computed: {
+    ...mapState(['city'])
+  },
   methods: {
+    ...mapMutations(['changeCity']),
     handleHotCityClick (e) {
-      this.$store.commit('changeCity', e.target.innerHTML)
+      this.changeCity(e.target.innerText)
       this.$router.go(-1)
     }
   }

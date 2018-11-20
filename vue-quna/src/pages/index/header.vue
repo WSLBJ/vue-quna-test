@@ -1,22 +1,30 @@
 <script src="../../router/index.js"></script>
 <template>
-    <div class="header">
+    <div class="header" ref="header">
       <div class="back iconfont">&#xe600;</div>
       <div class="search">
         <span class="iconfont search-icon">&#xe608;</span>输入城市/景点/游玩主题
       </div>
       <div class="city" @click="handleCityClick">
-        {{$store.getters.doubleCity}}
+        {{doubleCity}}
       </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'index-header',
+  computed: {
+    ...mapGetters(['doubleCity'])
+  },
   methods: {
     handleCityClick () {
-      this.$router.push('/city')
+      this.$refs.header.style.background = "red"
+      // this.$router.push('/city')
+    },
+    test () {
+      alert('hello')
     }
   }
 }

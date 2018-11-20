@@ -2,7 +2,7 @@
 <script src="../../router/index.js"></script>
 <template>
  <div>
-     <index-header></index-header>
+     <index-header ref="header"></index-header>
      <index-swiper :list="swiperInfo"></index-swiper>
      <index-icons :list="iconsInfo"></index-icons>
      <index-sights :list="sightsInfo"></index-sights>
@@ -14,7 +14,7 @@ import IndexHeader from './header'
 import IndexSwiper from './swiper'
 import IndexIcons from './icons'
 import IndexSights from './sights'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
 export default {
   name: 'index',
@@ -31,9 +31,17 @@ export default {
       sightsInfo: []
     }
   },
+  computed: {
+    ...mapState({
+      city: 'city'
+    })
+  },
   methods: {
+    ...mapActions({
+      delayCity: 'changeCityDelayFiveSeconds'
+    }),
     getIndexData () {
-      axios.get('/api/index.json?city=' + this.$store.state.city)
+      axios.get('/api/index.json?city=' + this.city)
         .then(this.handleGetDataSucc.bind(this))
         .catch(this.handleGetDataErr.bind(this))
     },
@@ -42,8 +50,8 @@ export default {
       this.swiperInfo = data.swiperList
       this.iconsInfo = data.iconList
       this.sightsInfo = data.sightsList
-      if (!this.$store.state.city) {
-        this.$store.dispatch('changeCityDelayFiveSeconds', data.city)
+      if (!this.city) {
+        this.delayCity(data.city)
       }
     },
     handleGetDataErr () {
@@ -53,8 +61,11 @@ export default {
   created () {
     this.getIndexData()
   },
+  mounted () {
+    this.$refs.header.test()
+  },
   watch: {
-    '$store.state.city' () {
+   city () {
       this.getIndexData()
     }
   }
